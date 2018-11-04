@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongWalkerGame", "Assembly-CSharp.csproj", "{7F9F4C28-6DC8-E923-2BDE-9C81E755DBF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongWalkerGame", "Assembly-CSharp-Editor.csproj", "{1513EDA6-3960-8CC9-2745-05593B7AB1B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F9F4C28-6DC8-E923-2BDE-9C81E755DBF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F9F4C28-6DC8-E923-2BDE-9C81E755DBF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F9F4C28-6DC8-E923-2BDE-9C81E755DBF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F9F4C28-6DC8-E923-2BDE-9C81E755DBF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1513EDA6-3960-8CC9-2745-05593B7AB1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1513EDA6-3960-8CC9-2745-05593B7AB1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1513EDA6-3960-8CC9-2745-05593B7AB1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1513EDA6-3960-8CC9-2745-05593B7AB1B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
