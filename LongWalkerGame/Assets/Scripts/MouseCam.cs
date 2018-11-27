@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class MouseCam : MonoBehaviour {
 
+
+
+
     Vector2 mouseControl;
     Vector2 smooth;
-    public float sensitivity = 5.0f;
-    public float smoothing = 2.0f;
+    public float sensitivity = 1.0f;
+    public float smoothing = 1.0f;
     GameObject Player;
 
 
     // Use this for initialization
     void Start () {
+
 
         Player = this.transform.parent.gameObject;
         Cursor.lockState = CursorLockMode.None;
@@ -21,6 +25,9 @@ public class MouseCam : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
+
 
 
         //MOUSE CAMERA CONTROL  
