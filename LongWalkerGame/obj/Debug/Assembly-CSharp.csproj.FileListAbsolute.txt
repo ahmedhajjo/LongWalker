@@ -75,3 +75,4 @@ D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp.csproj.CoreCompileInp
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp.dll
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp.pdb
+D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb

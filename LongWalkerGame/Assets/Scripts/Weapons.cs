@@ -8,9 +8,11 @@ public class Weapons : MonoBehaviour {
     public int BulletsLeft = 200;
     public int currentBullets;
 
+    public float Damage;
 
-    public float weaponRange = 100f;
 
+    public float weaponRange;
+    private bool IsActive;
     bool isRealoading;
 
     public Transform shootpoint;
@@ -18,6 +20,7 @@ public class Weapons : MonoBehaviour {
     public float FireRate = 0.1f;
 
     public float fireTimer;
+  
 
     private Animator anima;
 
@@ -28,7 +31,13 @@ public class Weapons : MonoBehaviour {
     public AudioSource Audio;
     public AudioClip shootSound;
 
-    //public GameObject PistolObj, AssultObj;
+    public GameObject PistolObj, AssultObj,ShootGunObj;
+
+
+    private float switchDelay = 1f;
+
+
+    
 
     ////public AudioSource AkSound, PistolSound;
     ////public ParticleSystem PistolFire, PistolBullet, AkFire, AkBullet;
@@ -42,6 +51,7 @@ public class Weapons : MonoBehaviour {
         anima = GetComponent<Animator>();
         Audio = GetComponent<AudioSource>();
 
+        
         currentBullets = BulletsMag;
     }
 	
@@ -49,6 +59,9 @@ public class Weapons : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+
+        SwitchGuns();
 
         if (Input.GetButton("Fire1"))
         {
@@ -64,9 +77,7 @@ public class Weapons : MonoBehaviour {
             
         {
             if (currentBullets < 30)
-            {
-                
-                
+            {   
             Reload();
             }
 
@@ -102,6 +113,11 @@ public class Weapons : MonoBehaviour {
 
             Destroy(SpawnDecal, 1f);
             Destroy(SpawnHole, 2f);
+
+            if(hit.transform.GetComponent<HealthGUI>())
+            {
+                hit.transform.GetComponent<HealthGUI>().RemoveHealth(Damage);
+            }
            
         }
 
@@ -132,6 +148,8 @@ public class Weapons : MonoBehaviour {
 
 
 
+
+
         AnimatorStateInfo info = anima.GetCurrentAnimatorStateInfo(0);
         isRealoading = info.IsName("Reload");
 
@@ -144,8 +162,65 @@ public class Weapons : MonoBehaviour {
 
     }
 
-   
 
 
+    //private IEnumerator SwitchDelay(int NewIndex)
+    //{
+
+    //    IsActive = true;
+    //    yield return new WaitForSeconds(switchDelay);
+
+    //    IsActive = false;
+    //    SwitchGuns();
+        
+    //}
+
+    void Pistol()
+    {
+        PistolObj.SetActive(true);
+        ShootGunObj.SetActive(false);AssultObj.SetActive(false);
+        Damage = 10f;
+        weaponRange = 50f;
+       
+    }
+
+    void Assult()
+    {
+        AssultObj.SetActive(true);
+        PistolObj.SetActive(false);ShootGunObj.SetActive(false);
+        Damage = 15f;
+        weaponRange = 70f;
+        IsActive = true;
+    }
+
+    void ShootGun()
+    {
+        ShootGunObj.SetActive(true);
+        AssultObj.SetActive(false); PistolObj.SetActive(false);
+        Damage = 20;
+        weaponRange = 15f;
+        IsActive = false;
+    }
+
+
+
+    void SwitchGuns()
+    {
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Pistol();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Assult();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ShootGun();
+        }
+    }
 
 }

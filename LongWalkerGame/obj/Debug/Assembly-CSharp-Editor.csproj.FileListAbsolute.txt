@@ -76,3 +76,5 @@ D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCom
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.csproj.CopyComplete
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.dll
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.pdb
+D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\Assembly-CSharp-Editor-firstpass.pdb
