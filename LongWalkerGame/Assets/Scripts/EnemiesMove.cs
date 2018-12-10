@@ -16,6 +16,8 @@ public class EnemiesMove : MonoBehaviour {
     public Transform WpParent;
     
 
+    private bool isIdle = false;
+
     void Start()
     {
         GetWP();
@@ -23,10 +25,12 @@ public class EnemiesMove : MonoBehaviour {
         
     }
 
-    void Update () {
-        if (Vector3.Distance(transform.position, Waypoints[current].transform.position.normalized) < WPRadius)
+    void Update() {
+
+       if (Vector3.Distance(transform.position, Waypoints[current].transform.position) < WPRadius)
         {
             current++;
+            StartCoroutine(IdleWhenWayPointReached());
             if (current >= Waypoints.Length)
             {
                 current = 0;
@@ -35,9 +39,33 @@ public class EnemiesMove : MonoBehaviour {
            
         }
 
-        Move();
-		
-	}
+
+        if(!isIdle)
+        {
+            Debug.Log("IM AI AND IM MOVING");
+            Move();
+
+        } 
+
+    }
+
+    private IEnumerator IdleWhenWayPointReached()
+    {
+        // Random Amount of time
+
+      
+        float randomTime = Random.Range(5, 10);
+        Debug.Log(" STOP MOVING");
+
+
+        isIdle = true;
+
+        yield return new WaitForSeconds(randomTime);
+
+        isIdle = false;
+        Debug.Log(" Resume MOVING");
+
+    }
 
     void GetWP()
 
@@ -54,7 +82,7 @@ public class EnemiesMove : MonoBehaviour {
 
      void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Waypoints[current].transform.position, Time.deltaTime * speed).normalized;
+        transform.position = Vector3.MoveTowards(transform.position, Waypoints[current].transform.position, Time.deltaTime * speed);
         transform.position = new Vector3(transform.position.x, 1.2f, transform.position.z);
     }
 }
