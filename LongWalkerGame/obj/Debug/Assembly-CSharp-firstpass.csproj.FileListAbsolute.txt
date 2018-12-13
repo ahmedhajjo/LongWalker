@@ -70,8 +70,8 @@ D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\UnityEditor.SpatialTracking.xml
 D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
 D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\UnityEditor.VR.xml
 D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
+D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-firstpass.dll
+D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-firstpass.pdb
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-firstpass.csprojAssemblyReference.cache
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-firstpass.csproj.CoreCompileInputs.cache
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-firstpass.csproj.CopyComplete
-D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-firstpass.dll
-D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-firstpass.pdb

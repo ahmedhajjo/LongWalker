@@ -4,15 +4,44 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+    public BaseState CurrentState;
 
 
-	// Use this for initialization
-	void Start () {
-		
+    public Transform[] Waypoints;
+    public Transform WpParent;
+   
+    public Transform playerTransform;
+
+
+
+
+    public Transform eye;
+    public float Damage;
+    public float weaponRange;
+
+    public float Health;
+    // Use this for initialization
+    void Start () {
+
+        CurrentState = new EnemiesMove() ;
+
+        Debug.Log("Moving");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        CurrentState.UpdateState(this);
+
+
+    }
+
+
+
+
+
+
+
+
+
 }

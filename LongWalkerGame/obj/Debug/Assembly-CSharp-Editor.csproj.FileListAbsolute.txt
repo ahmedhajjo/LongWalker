@@ -71,10 +71,10 @@ D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\UnityEditor.SpatialTracking.xml
 D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
 D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\UnityEditor.VR.xml
 D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
-D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
-D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.csproj.CopyComplete
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.dll
 D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.pdb
 D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
 D:\LongWalkerGame\LongWalkerGame\Temp\bin\Debug\Assembly-CSharp-Editor-firstpass.pdb
+D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
+D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
+D:\LongWalkerGame\LongWalkerGame\obj\Debug\Assembly-CSharp-Editor.csproj.CopyComplete

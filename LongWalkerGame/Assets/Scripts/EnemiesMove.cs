@@ -2,59 +2,68 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesMove : MonoBehaviour {
+public class EnemiesMove : BaseState {
 
-
-    public float speed;
+    
+    public float speed = 5;
     float WPRadius = 1;
     float RotationSpeed;
 
+
+
     int current = 0;
+
+     bool isIdle;
+
     
 
-    public Transform[] Waypoints;
-    public Transform WpParent;
-    
 
-    private bool isIdle = false;
 
-    void Start()
+    public override void UpdateState(Enemy  EnimeAI)
     {
-        GetWP();
-       
-        
-    }
+        base.UpdateState(EnimeAI);
 
-    void Update() {
+        Debug.Log("Move");
 
-       if (Vector3.Distance(transform.position, Waypoints[current].transform.position) < WPRadius)
+        if (Vector3.Distance(EnimeAI.transform.position, EnimeAI.Waypoints[current].transform.position) < WPRadius)
         {
+            Debug.Log("Move");
             current++;
-            StartCoroutine(IdleWhenWayPointReached());
-            if (current >= Waypoints.Length)
+            EnimeAI.StartCoroutine(IdleWhenWayPointReached());
+            if (current >= EnimeAI.Waypoints.Length)
             {
                 current = 0;
             }
 
-           
+         
+
+        }
+        if (!isIdle)
+        {
+            Debug.Log("IM AI AND IM MOVING");
+            Move(EnimeAI);
+
         }
 
 
-        if(!isIdle)
-        {
-            Debug.Log("IM AI AND IM MOVING");
-            Move();
 
-        } 
+        Chases(EnimeAI);
 
     }
+
+
+
+
+
+
+
 
     private IEnumerator IdleWhenWayPointReached()
     {
         // Random Amount of time
 
       
-        float randomTime = Random.Range(5, 10);
+        float randomTime = Random.Range(5,7);
         Debug.Log(" STOP MOVING");
 
 
@@ -67,22 +76,34 @@ public class EnemiesMove : MonoBehaviour {
 
     }
 
-    void GetWP()
 
+    
+
+    void Move(Enemy EnimeAI)
     {
-        int NumbWP = WpParent.childCount;
+        EnimeAI.transform.position = Vector3.MoveTowards(EnimeAI.transform.position, EnimeAI.Waypoints[current].transform.position, Time.deltaTime * speed);
+        EnimeAI.transform.position = new Vector3(EnimeAI.transform.position.x, 1.2f, EnimeAI.transform.position.z);
+    }
 
-        Waypoints = new Transform[NumbWP];
 
-        for (int i = 0; i<Waypoints.Length; i++)
+
+
+
+    public void Chases(Enemy EnimeAI)
+    {
+
+        Vector3 direction = EnimeAI.playerTransform.position - EnimeAI.transform.position;
+        float angle = Vector3.Angle(direction, EnimeAI.transform.forward);
+
+        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 20f && angle < 100)
         {
-            Waypoints[i] = WpParent.GetChild(i);
+
+            EnimeAI.CurrentState = new Chase();
+
+            Debug.Log(" I am now chasing");
         }
+
     }
 
-     void Move()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, Waypoints[current].transform.position, Time.deltaTime * speed);
-        transform.position = new Vector3(transform.position.x, 1.2f, transform.position.z);
-    }
 }
+

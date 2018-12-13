@@ -106,7 +106,7 @@ public class EnemenyFSM : MonoBehaviour
 
             direction.y = 0;
 
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+    //        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
 
 
             if (direction.magnitude > 3)

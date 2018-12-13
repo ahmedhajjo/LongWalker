@@ -115,8 +115,8 @@ public class Weapons : MonoBehaviour {
 
             
 
-            Destroy(SpawnDecal, 0.5f);
-            Destroy(SpawnHole, 1f);
+            Destroy(SpawnDecal, 0.2f);
+            Destroy(SpawnHole, 0.2f);
 
             if(hit.transform.GetComponent<HealthGUI>())
             {

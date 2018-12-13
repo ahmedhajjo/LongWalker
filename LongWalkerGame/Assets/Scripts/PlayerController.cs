@@ -26,10 +26,10 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         // PlayerMovement
-        float moveHor = Input.GetAxis("Horizontal") * WalkSpeed * Time.deltaTime;
-        float moveVert = Input.GetAxis("Vertical") * WalkSpeed * Time.deltaTime;
+        float moveHor = Input.GetAxis("Horizontal") * WalkSpeed * Time.deltaTime * speed;
+        float moveVert = Input.GetAxis("Vertical") * WalkSpeed * Time.deltaTime * speed;
         transform.Translate(moveHor, 0, moveVert);
-
+        //transform.Rotate(0, 0, moveVert);
         float Jump = Input.GetAxis("Jump") * jumpSpeed * Time.deltaTime;
         transform.Translate(moveHor, Jump, moveVert);
     }
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKey(KeyCode.W)&& Input.GetKey(KeyCode.LeftShift))
         {
             isRunning = true;
-            speed = RunSpeed;
+            speed = RunSpeed ;
             Debug.Log("running");
         }
         else
