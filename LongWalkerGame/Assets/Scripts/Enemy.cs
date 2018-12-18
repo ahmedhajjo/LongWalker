@@ -6,10 +6,8 @@ public class Enemy : MonoBehaviour {
 
     public BaseState CurrentState;
 
-
     public Transform[] Waypoints;
     public Transform WpParent;
-   
     public Transform playerTransform;
 
 
