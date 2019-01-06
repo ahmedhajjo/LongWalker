@@ -39,7 +39,7 @@ public class Attack : BaseState {
         Vector3 direction = EnimeAI.playerTransform.position - EnimeAI.transform.position;
         float angle = Vector3.Angle(direction, EnimeAI.transform.forward);
 
-        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) > 15f )
+        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 20f && angle < 100)
         {
 
             EnimeAI.CurrentState = new Chase();

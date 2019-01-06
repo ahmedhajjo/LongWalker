@@ -83,7 +83,7 @@ public class EnemiesMove : BaseState {
     {
         EnimeAI.transform.position = Vector3.MoveTowards(EnimeAI.transform.position, EnimeAI.Waypoints[current].transform.position, Time.deltaTime * speed);
         EnimeAI.transform.rotation = Quaternion.Slerp(EnimeAI.transform.rotation, Quaternion.LookRotation(EnimeAI.Waypoints[current].transform.position - EnimeAI.transform.position), 0.1f);
-        
+        //EnimeAI.transform.position = new Vector3(EnimeAI.transform.position.x, 1.2f, EnimeAI.transform.position.z);
     }
 
 

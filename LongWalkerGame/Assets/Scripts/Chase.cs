@@ -2,10 +2,6 @@
 
 public class Chase : BaseState {
 
-    float MaxVel = 20;
-    public float MaxForce;
-    public float MaxSpeed;
-    public float SlowRadius;
 
 
 
@@ -17,20 +13,48 @@ public class Chase : BaseState {
             base.UpdateState(EnimeAI);
 
 
+            Vector3 direction = EnimeAI.playerTransform.position - EnimeAI.transform.position;
+            float angle = Vector3.Angle(direction, EnimeAI.transform.forward);
+
+            if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 20f && angle < 100)
+            {
+
+                direction.y = 0;
+
+             EnimeAI.transform.rotation = Quaternion.Slerp(EnimeAI.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+
+        
+                if (direction.magnitude > 3)
+                {
+                    EnimeAI.transform.Translate(0, 0, 0.5f * Time.deltaTime *speed);
+
+                }
 
 
-        Chases(EnimeAI);
+
+        }
 
 
 
 
+
+        Patrol(EnimeAI);
 
         Attack(EnimeAI);
 
-        Wander(EnimeAI);
-
     }
 
+
+    public void Patrol(Enemy EnimeAI) 
+    {
+        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) > 20f)
+        {
+            EnimeAI.CurrentState = new EnemiesMove();
+
+            Debug.Log(" BackToPatrol");
+
+        }
+    }
 
 
     public void Attack(Enemy EnimeAI)
@@ -38,7 +62,7 @@ public class Chase : BaseState {
 
         Vector3 direction = EnimeAI.playerTransform.position - EnimeAI.transform.position;
         float angle = Vector3.Angle(direction, EnimeAI.transform.forward);
-        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 10f )
+        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 10f  && angle <80)
         {
             EnimeAI.CurrentState = new Attack();
 
@@ -48,51 +72,7 @@ public class Chase : BaseState {
     }
 
 
-    public void Chases (Enemy EnimeAI)
-    {
 
-        Vector3 direction = EnimeAI.playerTransform.position - EnimeAI.transform.position;
-        float angle = Vector3.Angle(direction, EnimeAI.transform.forward);
-
-        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 20f && angle < 100)
-        {
-
-            direction.y = 0;
-
-            EnimeAI.transform.rotation = Quaternion.Slerp(EnimeAI.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
-
-
-            if (direction.magnitude > 3)
-            {
-                EnimeAI.transform.Translate(0, 0, 0.5f * Time.deltaTime * speed);
-            }
-        }
-
-
-
-    }
-
-
-
-    public void Wander(Enemy EnimeAI)
-    {
-         if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) > 20f)
-        {
-            EnimeAI.CurrentState = new WanderBeh();
-        }
-
-    }
-
-    Vector3 Seeking(Enemy EnimeAI)
-    {
-        Vector3 DesiredVel = EnimeAI.playerTransform.transform.position - EnimeAI.transform.position;
-        DesiredVel = Vector3.Normalize(DesiredVel);
-        DesiredVel *= MaxVel;
-        Vector3 seekForce = DesiredVel - EnimeAI.rb.velocity;
-
-        return seekForce;
-
-    }
 
 }
 

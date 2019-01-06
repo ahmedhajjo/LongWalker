@@ -32,12 +32,11 @@ public class Weapons : MonoBehaviour {
     public AudioClip shootSound;
 
     AnimatorStateInfo info;
-    public PlayerController Swip;
+  
     public Weapons[] weapons;
     public int index;
 
-    //private float switchDelay = 1f;
-
+  
 
 
 
@@ -118,7 +117,7 @@ public class Weapons : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(shootpoint.position, shootpoint.transform.forward, out hit, weaponRange))
         {
-            GameObject SpawnDecal = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
+            GameObject SpawnDecal = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
             SpawnDecal.transform.SetParent(hit.transform);
 
             Debug.Log(hit.transform.name + "found");
