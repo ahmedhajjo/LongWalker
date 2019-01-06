@@ -22,7 +22,7 @@ public class ToolPluguin : Editor
 
     void screenGUI()
     {
-        if (Script = null)
+        if (Script == null)
         {
             Script = (Tool)target;
         }

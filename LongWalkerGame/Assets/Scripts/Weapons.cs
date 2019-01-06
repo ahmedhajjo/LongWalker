@@ -31,19 +31,21 @@ public class Weapons : MonoBehaviour {
     public AudioSource Audio;
     public AudioClip shootSound;
 
-    
-
+    AnimatorStateInfo info;
+    public PlayerController Swip;
+    public Weapons[] weapons;
+    public int index;
 
     //private float switchDelay = 1f;
 
 
-    
+
 
     ////public AudioSource AkSound, PistolSound;
     ////public ParticleSystem PistolFire, PistolBullet, AkFire, AkBullet;
 
 
- 
+
 
     // Use this for initialization
     void Start()
@@ -63,11 +65,9 @@ public class Weapons : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
-
-      
-
-        if (Input.GetButton("Fire1"))
+        info = anima.GetCurrentAnimatorStateInfo(0);
+        SwipGuns();
+        if (Input.GetButton("Fire1") && !info.IsName("Reload"))
         {
             if (currentBullets > 0)
                 Fire();
@@ -88,35 +88,47 @@ public class Weapons : MonoBehaviour {
         
            
         }
-        if (fireTimer < FireRate)
-            fireTimer += Time.deltaTime;
+        if (fireTimer < FireRate) fireTimer += Time.deltaTime;
 
-    
-      
-       
-	}
+          
+        /* if ((Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Alpha3)) && !info.IsName("Reload"))
+         {
+
+             Debug.Log("firon");
+
+             isRealoading = info.IsName("GunIn");
+             anima.CrossFadeInFixedTime("GunIn", 1f);
+         }
+         */
+
+
+        
+
+
+    }
 
 
     private void Fire()
     {
 
-        AnimatorStateInfo info = anima.GetCurrentAnimatorStateInfo(0);
-        isRealoading= info.IsName("Fire");
+        isRealoading = info.IsName("Fire");
 
         if (fireTimer < FireRate || currentBullets <= 0 || isRealoading ) return;
 
         RaycastHit hit;
         if (Physics.Raycast(shootpoint.position, shootpoint.transform.forward, out hit, weaponRange))
         {
-            GameObject SpawnDecal = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
+            GameObject SpawnDecal = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
+            SpawnDecal.transform.SetParent(hit.transform);
+
             Debug.Log(hit.transform.name + "found");
 
             GameObject SpawnHole = Instantiate(HoleEffect, hit.point, Quaternion.FromToRotation(Vector3.forward,hit.normal));
+            SpawnHole.transform.SetParent(hit.transform);
 
-            
 
-            Destroy(SpawnDecal, 0.2f);
-            Destroy(SpawnHole, 0.2f);
+            Destroy(SpawnDecal, 1f);
+            Destroy(SpawnHole, 2f);
 
             if(hit.transform.GetComponent<HealthGUI>())
             {
@@ -127,6 +139,8 @@ public class Weapons : MonoBehaviour {
             {
                 hit.transform.GetComponent<HealthGUI>().RemoveHealth(Damage);
             }
+
+                
 
         }
 
@@ -154,12 +168,6 @@ public class Weapons : MonoBehaviour {
         BulletsLeft -= BulletDeduct;
         currentBullets += BulletDeduct;
 
-
-
-
-
-
-        AnimatorStateInfo info = anima.GetCurrentAnimatorStateInfo(0);
         isRealoading = info.IsName("Reload");
 
         if (isRealoading) {return; }
@@ -184,39 +192,41 @@ public class Weapons : MonoBehaviour {
 
     //}
 
-    //void Pistol()
-    //{
-    //    PistolObj.SetActive(true);
-    //    ShootGunObj.SetActive(false);AssultObj.SetActive(false);
+
+    public void SwipGuns() {
 
 
-    //    Damage = 10f;
-    //    weaponRange = 50f;
-    //    IsActive = false;
-    //}
+        isRealoading = info.IsName("GunIn");
 
-    //void Assult()
-    //{
-    //    AssultObj.SetActive(true);
-    //    PistolObj.SetActive(false);ShootGunObj.SetActive(false);
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+
+            weapons[index].gameObject.SetActive(false);
+            index = 0;
+            weapons[index].gameObject.SetActive(true);
+            anima.CrossFadeInFixedTime("GunOut", 0.5f);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+    
+            weapons[index].gameObject.SetActive(false);
+            index = 1;
+            weapons[index].gameObject.SetActive(true);
+            anima.CrossFadeInFixedTime("GunOut", 0.5f);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            weapons[index].gameObject.SetActive(false);
+            index = 2;
+            weapons[index].gameObject.SetActive(true);
+        }
+    }
+    
+   
+  }
 
 
-    //    Damage = 15f;
-    //    weaponRange = 70f;
-    //    IsActive = true;
-    //}
-
-    //void ShootGun()
-    //{
-    //    ShootGunObj.SetActive(true);
-    //    AssultObj.SetActive(false); PistolObj.SetActive(false);
-    //    Damage = 20;
-    //    weaponRange = 15f;
-    //    IsActive = false;
-    //}
-
-
-
-  
-
-}
