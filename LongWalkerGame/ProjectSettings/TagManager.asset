@@ -7,6 +7,7 @@ TagManager:
   - M4Gun
   - Enemy
   - Ground
+  - AK47
   layers:
   - Default
   - TransparentFX

@@ -15,8 +15,16 @@ public class SmartMan : MonoBehaviour {
     public Transform eye;
     public Rigidbody rb;
 
+    public Transform Enemy;
+
+
+
+    public Animator anim;
+
     public int current = 0;
 
+    public float speed = 1;
+    public float WPRadius = 0.2f;
 
     //CHASE / SEEK VALUES
     public float MaxForce;
@@ -40,9 +48,13 @@ public class SmartMan : MonoBehaviour {
 
     public int health = 100;
 
+ 
+
     // Use this for initialization
     void Start () {
-       
+
+        anim = GetComponent<Animator>();
+
         rb = GetComponent<Rigidbody>();
 
         CurrentState = new Patrol();
@@ -52,14 +64,21 @@ public class SmartMan : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CurrentState.UpdateState(this);
- 
+
+
+
+
+
+
+
+
     }
 
 
     public void move(Vector3 dir)
     {
   
-        rb.AddForce(dir);
+        rb.AddForce(dir*MaxForce);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, MaxSpeed);
     }
 

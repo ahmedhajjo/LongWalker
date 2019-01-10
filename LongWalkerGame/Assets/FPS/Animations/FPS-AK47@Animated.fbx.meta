@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 17e40dbd3ce54d14aaf12c5eb364e56f
+guid: 02f72cc7376377649a0d370f0879d84e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -142,17 +142,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: AK-47
-    second: {fileID: 2100000, guid: 1187929aa0d361a44ac1dde713a43740, type: 2}
+    second: {fileID: 2100000, guid: 1af8dec8e2928bb4f856b4a51fd6068b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: high-poly
-    second: {fileID: 2100000, guid: ef9a11467f4b4e446a59224baa88739c, type: 2}
+    second: {fileID: 2100000, guid: c787a8ff0e5c2074faf79323be8c3660, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: male01
-    second: {fileID: 2100000, guid: 233591175e6dd934bb15e08e57a39f2d, type: 2}
+    second: {fileID: 2100000, guid: 26d857965f0411f448f3711a6015c14c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

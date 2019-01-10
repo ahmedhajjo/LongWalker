@@ -33,15 +33,11 @@ public class Weapons : MonoBehaviour {
 
     AnimatorStateInfo info;
   
-    public Weapons[] weapons;
-    public int index;
+ 
 
   
-
-
-
-    ////public AudioSource AkSound, PistolSound;
-    ////public ParticleSystem PistolFire, PistolBullet, AkFire, AkBullet;
+    
+    
 
 
 
@@ -65,7 +61,7 @@ public class Weapons : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         info = anima.GetCurrentAnimatorStateInfo(0);
-        SwipGuns();
+       
         if (Input.GetButton("Fire1") && !info.IsName("Reload"))
         {
             if (currentBullets > 0)
@@ -192,39 +188,7 @@ public class Weapons : MonoBehaviour {
     //}
 
 
-    public void SwipGuns() {
-
-
-        isRealoading = info.IsName("GunIn");
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-
-            weapons[index].gameObject.SetActive(false);
-            index = 0;
-            weapons[index].gameObject.SetActive(true);
-            anima.CrossFadeInFixedTime("GunOut", 0.5f);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-    
-            weapons[index].gameObject.SetActive(false);
-            index = 1;
-            weapons[index].gameObject.SetActive(true);
-            anima.CrossFadeInFixedTime("GunOut", 0.5f);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            weapons[index].gameObject.SetActive(false);
-            index = 2;
-            weapons[index].gameObject.SetActive(true);
-        }
-    }
-    
+  
    
   }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     public float speed;
@@ -49,6 +50,12 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (PlayerHealth <= 0)
+        {
+            SceneManager.LoadScene(0);
+
+        }
+
 
         Jump();
 

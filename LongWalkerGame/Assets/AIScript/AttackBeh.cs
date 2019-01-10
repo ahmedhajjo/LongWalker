@@ -10,13 +10,10 @@ public class AttackBeh : BaseAI {
 
     public override void UpdateState(SmartMan EnimeAI)
     {
-        base.UpdateState(EnimeAI);
 
         RaycastHit hit;
 
         //Debug.DrawRay(EnimeAI.eye.position, EnimeAI.eye.forward.normalized * EnimeAI.weaponRange, Color.red);
-   
-
 
         if (Physics.Raycast(EnimeAI.eye.position, EnimeAI.eye.transform.forward, out hit, EnimeAI.WeaponRange) && hit.collider.CompareTag("Player"))
         {
@@ -39,7 +36,7 @@ public class AttackBeh : BaseAI {
         Vector3 direction = EnimeAI.playerTransform.position - EnimeAI.transform.position;
         float angle = Vector3.Angle(direction, EnimeAI.transform.forward);
 
-        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) > 15f && angle < 100f)
+        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) > 1f && angle < 100f)
         {
 
             EnimeAI.CurrentState = new SeekChase();

@@ -6,7 +6,7 @@ public class HealthGUI : MonoBehaviour {
 
 
     [SerializeField]private float MinHealth = 1;
-    [SerializeField]private float MaxHealth = 100;
+  public float MaxHealth = 100;
 
     public void RemoveHealth(float amount)
 

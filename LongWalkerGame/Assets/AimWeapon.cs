@@ -14,7 +14,7 @@ public class AimWeapon : MonoBehaviour {
 
 
     float AimSpeed = 30f;
-    float ScopedVov = 40;
+    float AimedScoop = 55f;
     float NormalVov = 60;
 
     // -0.046     -3.13    -0.162
@@ -34,15 +34,15 @@ public class AimWeapon : MonoBehaviour {
 
             Debug.Log("AIMING");
 
-            MainCamera.fieldOfView = ScopedVov;
-            anim.SetBool("Running", false);
+            MainCamera.fieldOfView = AimedScoop;
+            anim.SetBool("IsAim", false);
 
         }
 
         if (Input.GetMouseButtonUp(1))
         {
             MainCamera.fieldOfView = NormalVov;
-            anim.SetBool("Running",true);
+            anim.SetBool("IsAim",true);
 
             transform.localPosition = HipFire;
 
