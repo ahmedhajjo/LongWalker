@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UI : MonoBehaviour {
+public class UI : MonoBehaviour
+{
 
     public Text TimeText;
 
@@ -27,15 +28,17 @@ public class UI : MonoBehaviour {
     GameObject CurrentWeapon;
     // Use this for initialization
 
-    void Start () {
+    void Start()
+    {
         PlayerScript = Player.GetComponent<PlayerController>();
 
-        
-        
+
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
 
 
@@ -55,9 +58,8 @@ public class UI : MonoBehaviour {
         Second = (int)(Time.time % 60);
         TimeText.text = Minutes.ToString("00") + ":" + Second.ToString("00");
 
-        HealthText.text = "+"+ PlayerScript.PlayerHealth;
-
+        HealthText.text = "+" + PlayerScript.PlayerHealth;
         MagAmmo.text = WeaponScript.currentBullets + "";
         totalAmmo.text = WeaponScript.BulletsLeft + "";
-	}
+    }
 }

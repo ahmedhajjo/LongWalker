@@ -17,12 +17,6 @@ public class AimWeapon : MonoBehaviour {
     float AimedScoop = 55f;
     float NormalVov = 60;
 
-    // -0.046     -3.13    -0.162
-
-    //-0.31     -3.151     -0.183
-
-
-    //-0.791
     // Update is called once per frame
     void Update () {
 		if (Input.GetMouseButton(1))

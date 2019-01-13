@@ -4,31 +4,19 @@ using UnityEngine;
 
 public class Patrol : BaseAI
 {
-
-
-    
-
-    
-
-    int index =-1;
-    public float TempDis = Mathf.Infinity;
-
-   public float ClosestDis = Mathf.Infinity;
-    
-
-    int current = 0;
+    int current;
     bool isIdle;
     bool endReached = false;
 
+    public Patrol(SmartMan EnimeAI)
+    {
+        EnimeAI.anim.SetBool("isRun", false);
+        Closest(EnimeAI);
+    }
 
     public override void UpdateState(SmartMan EnimeAI)
     {
-
-
         Debug.Log("Move");
-
-
-
         if (Vector3.Distance(EnimeAI.transform.position, EnimeAI.Waypoints[current].transform.position) < EnimeAI.WPRadius)
         {
 
@@ -37,8 +25,6 @@ public class Patrol : BaseAI
                 current++;
 
             EnimeAI.StartCoroutine(IdleWhenWayPointReached(EnimeAI));
-
-         
 
             if (current >= EnimeAI.Waypoints.Length)
             {
@@ -58,13 +44,11 @@ public class Patrol : BaseAI
             }
 
             Debug.Log(current);
-            
-
         }
 
-        
 
-  
+
+
 
 
         if (!isIdle)
@@ -72,22 +56,18 @@ public class Patrol : BaseAI
             Debug.Log("IM AI AND IM MOVING");
             Move(EnimeAI);
 
-        //    EnimeAI.anim.SetBool("isWalk", true);
+            EnimeAI.anim.SetBool("isWalk", true);
+            
 
         }
-        //else
-        //{
-        //    EnimeAI.anim.SetBool("isWalk", false);
-        //}
 
 
         Vector3 Dir = EnimeAI.playerTransform.position - EnimeAI.transform.position;
 
 
         if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 2f)
-        {
+            {
             EnimeAI.CurrentState = new SeekChase();
-         
         }
     }
 
@@ -100,16 +80,17 @@ public class Patrol : BaseAI
         float randomTime = Random.Range(3, 5);
         Debug.Log(" STOP MOVING");
 
-      
+
 
         isIdle = true;
+        EnimeAI.anim.SetBool("isWalk", false);
 
-        yield return new WaitForSeconds(randomTime);
-      
+       yield return new WaitForSeconds(randomTime);
+
 
         isIdle = false;
 
-     
+
         Debug.Log(" Resume MOVING");
 
     }
@@ -129,17 +110,23 @@ public class Patrol : BaseAI
 
     public void Closest(SmartMan EnimeAI)
     {
+
+
+        int index = -1;
+        float TempDis = Mathf.Infinity;
         for (int i = 0; i < EnimeAI.Waypoints.Length; i++)
         {
-            float Dis = Vector3.Distance(EnimeAI.Enemy.position, EnimeAI.Waypoints[current].transform.position);
+            float Dis = Vector3.Distance(EnimeAI.transform.position, EnimeAI.Waypoints[i].transform.position);
 
             if (Dis < TempDis)
             {
-                Dis = TempDis;
-                index = current;
+                TempDis = Dis;
+                index = i;
             }
         }
-        
+
+        current = index;
+
 
     }
 

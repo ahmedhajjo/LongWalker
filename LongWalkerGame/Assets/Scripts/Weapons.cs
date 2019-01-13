@@ -167,8 +167,8 @@ public class Weapons : MonoBehaviour {
 
         if (isRealoading) {return; }
 
-        //--->
-        anima.CrossFadeInFixedTime("Reload", 0.5f);
+    
+        anima.CrossFadeInFixedTime("Reload", 0.1f);
 
      
 
@@ -176,16 +176,6 @@ public class Weapons : MonoBehaviour {
 
 
 
-    //private IEnumerator SwitchDelay(int NewIndex)
-    //{
-
-    //    IsActive = true;
-    //    yield return new WaitForSeconds(switchDelay);
-
-    //    IsActive = false;
-    //    SwitchGuns();
-
-    //}
 
 
   

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmartMan : MonoBehaviour {
+public class SmartMan : MonoBehaviour
+{
 
 
 
@@ -15,7 +16,7 @@ public class SmartMan : MonoBehaviour {
     public Transform eye;
     public Rigidbody rb;
 
-    public Transform Enemy;
+   
 
 
 
@@ -42,43 +43,48 @@ public class SmartMan : MonoBehaviour {
 
     //ATTACK Values
 
-    public float WeaponRange;
+
 
     //Enemie Valuse
 
     public int health = 100;
 
- 
+
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
+        
         anim = GetComponent<Animator>();
 
         rb = GetComponent<Rigidbody>();
 
-        CurrentState = new Patrol();
+        CurrentState = new Patrol(this);
+
+        
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         CurrentState.UpdateState(this);
 
+        if (health == 0)
+        {
+            enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
 
-
-
-
-
-
+        }
 
     }
 
 
     public void move(Vector3 dir)
     {
-  
-        rb.AddForce(dir*MaxForce);
+
+        rb.AddForce(dir * MaxForce);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, MaxSpeed);
     }
 

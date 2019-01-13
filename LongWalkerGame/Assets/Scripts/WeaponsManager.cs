@@ -8,13 +8,6 @@ public class WeaponsManager : MonoBehaviour {
 
     public GameObject[] weapons;
     public int index;
-
-	// Use this for initialization
-	void Start () {
-		
-        
-
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,28 +19,20 @@ public class WeaponsManager : MonoBehaviour {
 
     public void SwipGuns()
     {
-
-
         //isRealoading = info.IsName("GunIn");
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-
             weapons[index].gameObject.SetActive(false);
             index = 0;
             weapons[index].gameObject.SetActive(true);
-           
-
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-
             weapons[index].gameObject.SetActive(false);
             index = 1;
             weapons[index].gameObject.SetActive(true);
-        
-
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))

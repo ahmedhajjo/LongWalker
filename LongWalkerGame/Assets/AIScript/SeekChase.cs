@@ -2,37 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeekChase : BaseAI {
+public class SeekChase : BaseAI
+{
 
 
     public Patrol patrol;
+    public float reachedPlayerDistance = 0.5f;
+
+
     public override void UpdateState(SmartMan EnimeAI)
     {
-
-
-        Debug.Log("Seek");
-
         Vector3 direction = EnimeAI.playerTransform.position - EnimeAI.transform.position;
         float angle = Vector3.Angle(direction, EnimeAI.transform.forward);
 
-        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 2f && angle < 50f)
-        {
-            Seeking(EnimeAI);
-            direction.y = 0; 
-            EnimeAI.transform.rotation = Quaternion.Slerp(EnimeAI.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+        //if i am not close enough to player, then i will chase. else attack
 
-           
+ 
+
+        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < reachedPlayerDistance)
+        {
+            EnimeAI.CurrentState = new AttackBeh(EnimeAI.playerTransform.GetComponent<PlayerController>(), EnimeAI);
 
         }
+        else if(Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 3f &&
+                Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) > reachedPlayerDistance)
+        {
+
+            EnimeAI.anim.SetBool("isRun", true);
+            EnimeAI.anim.SetBool("isWalk", false);
+
+            Seeking(EnimeAI);
+            direction.y = 0;
+            EnimeAI.transform.rotation = Quaternion.Slerp(EnimeAI.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+        }
         else
-            EnimeAI.CurrentState = new Patrol();
-
-
-        Debug.Log(Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position));
-
-
-
-        Debug.Log(angle);
+        {
+            EnimeAI.CurrentState = new Patrol(EnimeAI);
+        }
     }
 
 
@@ -44,25 +50,6 @@ public class SeekChase : BaseAI {
         Vector3 seekForce = DesiredVel - EnimeAI.rb.velocity;
 
         EnimeAI.move(seekForce);
-  
-    }
 
-
- 
-
-
-
-    public void Attack(SmartMan EnimeAI)
-    {
-
-        Vector3 direction = EnimeAI.playerTransform.position - EnimeAI.transform.position;
-        float angle = Vector3.Angle(direction, EnimeAI.transform.forward);
-        if (Vector3.Distance(EnimeAI.playerTransform.position, EnimeAI.transform.position) < 0.5f )
-        {
-            EnimeAI.CurrentState = new AttackBeh();
-
-            Debug.Log(" Go To attack");
-
-        }
     }
 }
