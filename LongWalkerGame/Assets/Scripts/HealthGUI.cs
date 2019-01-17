@@ -5,15 +5,15 @@ using UnityEngine;
 public class HealthGUI : MonoBehaviour {
 
 
-    [SerializeField]private float MinHealth = 1;
-  public float MaxHealth = 100;
+    [SerializeField]private float MinHealth = 1; 
+    public float MaxHealth = 100;                          //FLoat Health
 
-    public void RemoveHealth(float amount)
+    public void RemoveHealth(float amount)  //Removal Health
 
     {
         if (MaxHealth < MinHealth)
         {
-            Destroy(this.gameObject);
+           
         }
 
         else

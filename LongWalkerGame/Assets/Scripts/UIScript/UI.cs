@@ -58,7 +58,7 @@ public class UI : MonoBehaviour
         Second = (int)(Time.time % 60);
         TimeText.text = Minutes.ToString("00") + ":" + Second.ToString("00");
 
-        HealthText.text = "+" + PlayerScript.PlayerHealth;
+        HealthText.text = "<color=#800000ff>+</color>" + PlayerScript.PlayerHealth;
         MagAmmo.text = WeaponScript.currentBullets + "";
         totalAmmo.text = WeaponScript.BulletsLeft + "";
     }

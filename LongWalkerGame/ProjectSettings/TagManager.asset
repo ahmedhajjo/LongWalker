@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Ground
   - AK47
+  - Fire
+  - Waypoint
   layers:
   - Default
   - TransparentFX

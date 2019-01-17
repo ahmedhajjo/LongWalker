@@ -7,6 +7,7 @@ public class DoorScript : MonoBehaviour
 
     public Animator anim;
     private AudioSource AdiouS;
+    public bool Access;
     // Use this for initialization
     void Start()
     {
@@ -15,25 +16,22 @@ public class DoorScript : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-
-
-        anim.SetBool("isOpen", true);
-        AdiouS.Play();
+        if (Access)
+        {
+            anim.SetBool("isOpen", true);
+            AdiouS.Play();
+        }
 
     }
 
     void OnTriggerExit(Collider col)
     {
-
-
-        anim.SetBool("isOpen", false);
-        AdiouS.Play();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        if (Access)
+        {
+            anim.SetBool("isOpen", false);
+            AdiouS.Play();
+        }
 
     }
+
 }

@@ -3,36 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LighController : MonoBehaviour {
-
-    Light light;
-
-    public float miniTimeBeforFlickers;
-    public float maxTimeAfterFlickers;
-
-
-
-
+    Light TheLight;  //Light Component
+    MeshRenderer meshRender;
+    public float miniTimeBeforFlickers; //Minim Flicker Time
+    public float maxTimeAfterFlickers;  //Max Time AfterFliker.
 	// Use this for initialization
 	void Start () {
 
-        light = GetComponent<Light>();
-
-        StartCoroutine("MakeflickerLight");
+        TheLight = GetComponent<Light>();
+        meshRender = GetComponent<MeshRenderer>();
+        StartCoroutine("MakeflickerLight"); //Start IENUMERATOR
 	}
-
     IEnumerator MakeflickerLight()
     {
-        while (true)
+        while (true) //While loop 
         {
             yield return new WaitForSeconds(Random.Range(miniTimeBeforFlickers, maxTimeAfterFlickers));
-            light.enabled = !light.enabled;
+            TheLight.enabled = !TheLight.enabled; //Enable , Disable light.
+            meshRender.enabled = !meshRender.enabled;
         }
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-
-        
-	}
 }

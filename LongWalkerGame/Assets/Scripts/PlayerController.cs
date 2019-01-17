@@ -2,24 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public float WalkSpeed;
-    public float RunSpeed;
-    public bool isRunning = false;
-    public bool isWalking = false;
+    public float speed;  //Speed
+    public float WalkSpeed; //Walk
+    public float RunSpeed; //Run
+    public bool isRunning = false;  //Bool isRunning
+  
 
-    public float jumpSpeed;
-    bool isGrounded;
-    Rigidbody rb;
-    public AudioSource footStepsAudio, runninAudio, JumpAudio;
+    private float bloodCtrl; //Blood
+
+    public float jumpSpeed = 120f;  //Jump
+    bool isGrounded;  //Bool isGrounded
+    Rigidbody rb;  
+    public AudioSource footStepsAudio, runninAudio, JumpAudio;  //Audios
     public Animator anim;
-    //  public Weapons[] weapons;
-    //  public int index;
+    public static bool GamePaused = false;
+    public GameObject PauseMenu;
 
     public int PlayerHealth = 100;
+    public RawImage BloodImage;
     float moveHor;
     float moveVert;
 
@@ -29,66 +33,74 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // this  function is called to lock the cursor in game mode
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
 
     void FixedUpdate()
     {
         // PlayerMovement
-        moveHor = Input.GetAxis("Horizontal") * WalkSpeed * Time.fixedDeltaTime * speed;
+        moveHor = Input.GetAxis("Horizontal") * WalkSpeed * Time.fixedDeltaTime * speed;  //
         moveVert = Input.GetAxis("Vertical") * WalkSpeed * Time.fixedDeltaTime * speed;
         transform.Translate(moveHor, 0, moveVert);
 
-        //transform.Rotate(0, 0, moveVert);
+   
 
 
     }
     // Update is called once per frame
     void Update()
     {
-        if (PlayerHealth <= 0)
+        if (PlayerHealth <= 0)  //dead go to Main Menu Scene
         {
             SceneManager.LoadScene(0);
 
         }
 
+        
+        if (bloodCtrl > 0)  //Blood Image
+        {
+            bloodCtrl -= 0.005f;  
+            BloodImage.color =  new Color(1,1,1,Mathf.Lerp(0, 1, bloodCtrl));  //Slow Subtract From Alpha Color
+        }
 
-        Jump();
+
+        Jump(); //Jump Function
 
 
-        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A)) && !isRunning)
+        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A)) && !isRunning) //Play WASD 
         {
             if (!footStepsAudio.isPlaying)
             {
-                footStepsAudio.Play();
-                anim.SetBool("ISwalk", true);
+                footStepsAudio.Play(); //Player Audio
+                anim.SetBool("ISwalk", true);  //PLay Animation
             }
 
         }
 
         else
         {
-            footStepsAudio.Stop();
-            anim.SetBool("ISwalk", false);
+            footStepsAudio.Stop();     //Stop Audio
+            anim.SetBool("ISwalk", false);    // Stop Anim
         }
 
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))  //Run W+Left Shift
         {
 
-            footStepsAudio.Stop();
+            footStepsAudio.Stop();   //Stop Audio of Walk
             if (!runninAudio.isPlaying)
             {
-                runninAudio.Play();
+                runninAudio.Play(); //Play Run Audio
             }
 
-            isRunning = true;
-            speed = RunSpeed;
-            Debug.Log("running");
+            isRunning = true;  //Run
+            speed = RunSpeed;  //Change Speed to Run Speed 
+            Debug.Log("running"); //DEBUG
         }
 
         else
         {
-            isRunning = false;
+            isRunning = false; //Walk Mode
             speed = WalkSpeed;
         }
 
@@ -96,13 +108,24 @@ public class PlayerController : MonoBehaviour
         // EXCAPE Button To enable the Cursor
         if (Input.GetKeyDown("escape"))
         {
-            Cursor.lockState = CursorLockMode.None;
+            
+            if (GamePaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }   
+
         }
     }
 
     public void ApplyDamage(int Dmg)
     {
         PlayerHealth = PlayerHealth - Dmg;
+        BloodImage.color = new Color(255, 255, 255, 255);
+        bloodCtrl = 1;
     }
 
     void OnCollisionEnter(Collision col)
@@ -116,7 +139,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             isGrounded = false;
-            rb.AddForce(transform.up * 120);
+            rb.AddForce(transform.up * jumpSpeed);
 
             JumpAudio.Play();
 
@@ -124,7 +147,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void Resume()
+    {
+        PauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        GamePaused = false; 
+    }
 
-
-
+    void Pause() 
+    {
+        PauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        GamePaused = true;
+    }
 }
