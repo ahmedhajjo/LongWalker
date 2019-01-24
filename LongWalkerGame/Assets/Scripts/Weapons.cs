@@ -92,6 +92,7 @@ public class Weapons : MonoBehaviour
         if (fireTimer < FireRate || currentBullets <= 0 || isRealoading) return;  //
 
         RaycastHit hit;
+
       
         if (Physics.Raycast(shootpoint.position, shootpoint.transform.forward, out hit, weaponRange)) //RayCast (Vector Origin, Vector Direction ,FloatMaxDistance)
         {

@@ -8,6 +8,7 @@ public class SceneManagerScript : MonoBehaviour {
 
     public void Buttons(string buttonName)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(buttonName);
     }
 

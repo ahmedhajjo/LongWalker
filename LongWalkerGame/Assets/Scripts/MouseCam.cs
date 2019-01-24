@@ -2,35 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseCam : MonoBehaviour {
-
-
- 
-
-
+public class MouseCam : MonoBehaviour
+{
     Vector2 mouseControl;
     Vector2 smooth;
     public float sensitivity = 1.0f;
     public float smoothing = 1.0f;
     GameObject Player;
-
-
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+
 
 
         Player = this.transform.parent.gameObject;
-        Cursor.lockState = CursorLockMode.None;
+
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-
-
-
-
-
+    // Update is called once per frame
+    void Update()
+    {
         //MOUSE CAMERA CONTROL  
         // CAMERA SMOOTH
 
@@ -44,9 +35,5 @@ public class MouseCam : MonoBehaviour {
         // ROTATION LOCKED Y AXIS DEGREE -90 to 90  
         // MOUSE CURSOR DISABLED WHILE GAME IS PLAYING
         mouseControl.y = Mathf.Clamp(mouseControl.y, -90f, 90f);
-        Cursor.lockState = CursorLockMode.Locked;
-
-
-
     }
 }

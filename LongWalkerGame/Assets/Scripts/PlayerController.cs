@@ -14,33 +14,43 @@ public class PlayerController : MonoBehaviour
 
     private float bloodCtrl; //Blood
 
-    public float jumpSpeed = 120f;  //Jump
+    public int jumpSpeed = 120;  //Jump
     bool isGrounded;  //Bool isGrounded
     Rigidbody rb;  
     public AudioSource footStepsAudio, runninAudio, JumpAudio;  //Audios
     public Animator anim;
     public static bool GamePaused = false;
     public GameObject PauseMenu;
+    public Transform Canvas;
 
     public int PlayerHealth = 100;
     public RawImage BloodImage;
     float moveHor;
     float moveVert;
 
+    public Transform Ak, m4,aimWeapon, MouseCam;
+
+
     // Use this for initialization
+
+    private void Awake()
+    {
+        Cursor.visible = false;
+    }
+
+
     void Start()
     {
+       
         rb = GetComponent<Rigidbody>();
-        // this  function is called to lock the cursor in game mode
-        Cursor.lockState = CursorLockMode.Locked;
-        
+      
     }
 
 
     void FixedUpdate()
     {
         // PlayerMovement
-        moveHor = Input.GetAxis("Horizontal") * WalkSpeed * Time.fixedDeltaTime * speed;  //
+        moveHor = Input.GetAxis("Horizontal") * WalkSpeed * Time.fixedDeltaTime * speed;  
         moveVert = Input.GetAxis("Vertical") * WalkSpeed * Time.fixedDeltaTime * speed;
         transform.Translate(moveHor, 0, moveVert);
 
@@ -54,6 +64,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerHealth <= 0)  //dead go to Main Menu Scene
         {
             SceneManager.LoadScene(0);
+            Cursor.visible = true;
 
         }
 
@@ -105,18 +116,14 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        
         // EXCAPE Button To enable the Cursor
-        if (Input.GetKeyDown("escape"))
+
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            
-            if (GamePaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }   
+
+            Paused();
 
         }
     }
@@ -147,17 +154,33 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Resume()
-    {
-        PauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        GamePaused = false; 
-    }
 
-    void Pause() 
+
+   public void Paused()
     {
-        PauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        GamePaused = true;
+        if (Canvas.gameObject.activeInHierarchy == false)
+        {
+            Canvas.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            Debug.Log("Cursors");
+            Cursor.visible = true;
+            transform.GetComponent<PlayerController>().enabled = false;
+            m4.GetComponent<Weapons>().enabled = false;
+            Ak.GetComponent<Weapons>().enabled = false;
+            MouseCam.GetComponent<MouseCam>().enabled = false;
+            
+        }
+        else
+        {
+            Canvas.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+            Cursor.visible = false;
+            transform.GetComponent<PlayerController>().enabled = true;
+            m4.GetComponent<Weapons>().enabled = true;
+            Ak.GetComponent<Weapons>().enabled = true;
+            MouseCam.GetComponent<MouseCam>().enabled = true;
+            aimWeapon.GetComponent<AimWeapon>().enabled = true;
+        }
+
     }
 }

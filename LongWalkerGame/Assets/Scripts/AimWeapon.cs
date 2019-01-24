@@ -16,13 +16,13 @@ public class AimWeapon : MonoBehaviour
     float NormalVov = 60;
     public bool isAiming;
 
-    public Weapons WpRealod;
+    public Weapons AKreload,M4r;
    
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1) && !WpRealod.info.IsName("Reload")) //Input MouseButton1
+        if (Input.GetMouseButton(1) &&  !AKreload.info.IsName("Reload"))  //Input MouseButton1   // Disable Realod Animation While Reloading
         {
             transform.localPosition = Vector3.Slerp(transform.localPosition, aimDown, AimSpeed * Time.deltaTime);  
             Debug.Log("AIMING");

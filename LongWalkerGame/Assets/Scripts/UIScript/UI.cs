@@ -11,7 +11,7 @@ public class UI : MonoBehaviour
 
     public Text HealthText;
 
-    float Minutes, Second;
+    float levelStartTime, Minutes, Second;
 
     float health;
 
@@ -30,36 +30,26 @@ public class UI : MonoBehaviour
 
     void Start()
     {
+        levelStartTime = Time.time;   //Start Time
         PlayerScript = Player.GetComponent<PlayerController>();
-
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-
-        //  Move to manager 
-        //current weapon make it public 
         for (int i = 0; i < wm.weapons.Length; i++)
         {
-            if (wm.weapons[i].activeInHierarchy)
-            {
-                CurrentWeapon = wm.weapons[i];
+            if (wm.weapons[i].activeInHierarchy)   // Get Current Weapon
+            { 
+                CurrentWeapon = wm.weapons[i];  
                 WeaponScript = CurrentWeapon.GetComponent<Weapons>();
             }
         }
-
-
-        Minutes = (int)(Time.time / 60);
-        Second = (int)(Time.time % 60);
+        Minutes = (int)((Time.time - levelStartTime) / 60);
+        Second = (int)((Time.time - levelStartTime) % 60);
         TimeText.text = Minutes.ToString("00") + ":" + Second.ToString("00");
-
         HealthText.text = "<color=#800000ff>+</color>" + PlayerScript.PlayerHealth;
         MagAmmo.text = WeaponScript.currentBullets + "";
-        totalAmmo.text = WeaponScript.BulletsLeft + "";
+        totalAmmo.text = WeaponScript.BulletsLeft + "";  
     }
 }
